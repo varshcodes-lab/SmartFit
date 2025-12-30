@@ -1,41 +1,43 @@
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 from fastapi import FastAPI
-from backend.performance_engine import calculate_performance
-from backend.diet_engine import recommend_diet
-from backend.habit_tracker import predict_habit
-from backend.gym_recommender import recommend_gyms
-from backend.smart_gym_iot import get_iot_data
-from backend.virtual_gym_buddy import chat_response
+from fastapi.middleware.cors import CORSMiddleware
 
+from backend.api.tf import router as tf_router
+from backend.api.health import router as health_router
+from backend.api.performance import router as performance_router
+from backend.api.video import router as video_router
+from backend.api.tf_video import router as tf_video_router
+from backend.api.workout import router as workout_router
+from backend.db.init_db import init_db
+from backend.api.analytics import router as analytics_router
+from backend.api.coach import router as coach_router
 
-app = FastAPI(title="SmartFit AI Internship Backend")
+app = FastAPI(title="SmartFit API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+app.include_router(coach_router)
+app.include_router(tf_video_router)
+app.include_router(tf_router)
+app.include_router(health_router)
+app.include_router(performance_router)
+app.include_router(video_router)
+app.include_router(workout_router)
+app.include_router(analytics_router)
+
 
 @app.get("/")
-def home():
-    return {"status": "SmartFit AI Backend Running"}
+def root():
+    return {"status": "SmartFit backend running"}
 
-@app.get("/performance")
-def performance(correct: int, total: int, time: int):
-    score = calculate_performance(correct, total, time)
-    return {"Performance Score": score}
-
-@app.get("/diet")
-def diet(weight: float, height: float):
-    bmi = calculate_bmi(weight, height)
-    return {"BMI": round(bmi, 2), "Diet Plan": recommend_diet(bmi)}
-
-@app.get("/habit")
-def habit(days_gap: int, missed: int):
-    prob = predict_skip_probability(days_gap, missed)
-    return {"Skip Probability": prob}
-
-@app.get("/buddy")
-def buddy(message: str):
-    return {"Response": gym_buddy_response(message)}
-
-@app.get("/iot")
-def iot():
-    data = get_sensor_data()
-    return {
-        "Sensor Data": data,
-        "Suggestion": workout_adjustment(data)
-    }
+@app.on_event("startup")
+def startup():
+    init_db()
