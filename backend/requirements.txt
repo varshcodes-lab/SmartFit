@@ -3,7 +3,7 @@ uvicorn
 sqlalchemy
 psycopg2-binary
 python-dotenv
-opencv-python
-mediapipe
+opencv-python-headless
+mediapipe==0.10.14
 numpy
 openai
