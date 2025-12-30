@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime
 from datetime import datetime
-from backend.db.database import Base
+from db.database import Base
 
 
 class Workout(Base):

@@ -3,9 +3,9 @@ import shutil
 import os
 import uuid
 
-from backend.services.tf_video import analyze_video
-from backend.db.database import SessionLocal
-from backend.models.workouts import Workout
+from services.tf_video import analyze_video
+from db.database import SessionLocal
+from models.workouts import Workout
 
 router = APIRouter(prefix="/tf", tags=["Video Analysis"])
 

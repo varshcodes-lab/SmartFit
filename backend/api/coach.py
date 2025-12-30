@@ -4,9 +4,9 @@ from pydantic import BaseModel
 from typing import Optional, Dict
 from datetime import datetime, timedelta, timezone
 
-from backend.db.database import SessionLocal
-from backend.models.workouts import Workout
-from backend.services.coach_ai import get_coach_response
+from db.database import SessionLocal
+from models.workouts import Workout
+from services.coach_ai import get_coach_response
 
 router = APIRouter(prefix="/coach", tags=["SmartFit Coach"])
 

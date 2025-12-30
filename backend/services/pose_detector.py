@@ -2,7 +2,7 @@ import cv2
 import mediapipe as mp
 
 def analyze_pose(image_path: str):
-    # Lazy initialization (CRITICAL)
+    
     mp_pose = mp.solutions.pose
     pose = mp_pose.Pose(static_image_mode=True)
 

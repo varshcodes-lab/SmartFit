@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from backend.db.database import SessionLocal
-from backend.models.workouts import Workout
-from backend.schemas.workout import WorkoutCreate, WorkoutResponse
+from db.database import SessionLocal
+from models.workouts import Workout
+from schemas.workout import WorkoutCreate, WorkoutResponse
 
 router = APIRouter(prefix="/workout", tags=["Workout"])
 

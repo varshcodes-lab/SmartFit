@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from backend.services.virtual_gym_buddy import gym_buddy_response
-from backend.services.llm_chat import llm_chat
+from services.virtual_gym_buddy import gym_buddy_response
+from services.llm_chat import llm_chat
 
 router = APIRouter()
 

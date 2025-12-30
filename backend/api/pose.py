@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Query
 from pydantic import BaseModel, Field
-from backend.services.pose_detector import analyze_pose
-from backend.schemas.pose import PoseResponse
+from services.pose_detector import analyze_pose
+from schemas.pose import PoseResponse
 
 router = APIRouter(tags=["Pose"])
 

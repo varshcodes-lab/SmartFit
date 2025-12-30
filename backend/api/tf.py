@@ -2,9 +2,9 @@ from fastapi import APIRouter, UploadFile, File, HTTPException, Query, Depends
 import cv2
 import numpy as np
 
-from backend.services.tf_model import predict_intensity
-from backend.db.database import SessionLocal
-from backend.models.workouts import Workout
+from services.tf_model import predict_intensity
+from db.database import SessionLocal
+from models.workouts import Workout
 
 router = APIRouter(prefix="/tf", tags=["Pose Analysis"])
 

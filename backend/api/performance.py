@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Query
 from pydantic import BaseModel, Field
-from backend.services.performance_engine import calculate_performance
+from services.performance_engine import calculate_performance
 
 router = APIRouter(
     prefix="/performance",

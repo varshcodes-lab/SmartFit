@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Query
 from pydantic import BaseModel, Field
-from backend.services.llm_chat import llm_chat
-from backend.schemas.chat import ChatResponse
+from services.llm_chat import llm_chat
+from schemas.chat import ChatResponse
 
 router = APIRouter(tags=["AI Coach"])
 

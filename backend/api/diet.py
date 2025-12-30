@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from backend.services.diet_engine import recommend_diet
+from services.diet_engine import recommend_diet
 
 router = APIRouter()
 

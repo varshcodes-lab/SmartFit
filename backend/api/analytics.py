@@ -2,15 +2,15 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 
-from backend.db.database import SessionLocal
-from backend.models.workouts import Workout
+from db.database import SessionLocal
+from models.workouts import Workout
 
 router = APIRouter(
     prefix="/workout",
     tags=["Workout Analytics"]
 )
 
-# DB dependency
+
 def get_db():
     db = SessionLocal()
     try:

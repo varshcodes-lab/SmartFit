@@ -1,8 +1,8 @@
 from fastapi import APIRouter, UploadFile, File, Query
 import tempfile
 import shutil
-from backend.services.video_pose import analyze_video
-from backend.services.rep_counter import count_reps
+from services.video_pose import analyze_video
+from services.rep_counter import count_reps
 
 router = APIRouter(prefix="/video", tags=["Video Analysis"])
 

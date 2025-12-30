@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from backend.services.smart_gym_iot import get_iot_data
+from services.smart_gym_iot import get_iot_data
 
 router = APIRouter()
 
