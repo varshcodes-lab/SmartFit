@@ -1,57 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>SmartFit AI – Gym & Fitness Assistant</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-    <h1>SmartFit AI Gym & Fitness Assistant</h1>
-    <p class="subtitle">AI-powered fitness system (Internship Project)</p>
-
-    <div class="card">
-        <h2>Diet Recommendation</h2>
-        <input type="number" id="weight" placeholder="Weight (kg)">
-        <input type="number" id="height" placeholder="Height (m)">
-        <button onclick="getDiet()">Get Diet Plan</button>
-        <p id="dietResult"></p>
-    </div>
-
-    <div class="card">
-        <h2>Performance Score</h2>
-        <input type="number" id="correct" placeholder="Correct Reps">
-        <input type="number" id="total" placeholder="Total Reps">
-        <input type="number" id="time" placeholder="Time (minutes)">
-        <button onclick="getPerformance()">Calculate Score</button>
-        <p id="performanceResult"></p>
-    </div>
-
-    <div class="card">
-        <h2>Habit Tracker (AI Prediction)</h2>
-        <input type="number" id="gap" placeholder="Days since last workout">
-        <input type="number" id="missed" placeholder="Missed sessions">
-        <button onclick="getHabit()">Predict</button>
-        <p id="habitResult"></p>
-    </div>
-
-    <div class="card">
-        <h2>Virtual Gym Buddy</h2>
-        <input type="text" id="message" placeholder="Type your message">
-        <button onclick="talkBuddy()">Send</button>
-        <p id="buddyResult"></p>
-    </div>
-
-    <div class="card">
-        <h2>Smart Gym IoT (Simulated)</h2>
-        <button onclick="getIoT()">Get Machine Data</button>
-        <pre id="iotResult"></pre>
-    </div>
-
-    <footer>
-        <p>© 2025 SmartFit AI | Internship Submission</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>frontend</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
