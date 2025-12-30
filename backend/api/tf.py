@@ -1,10 +1,9 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException, Query, Depends
-import cv2
-import numpy as np
+from sqlalchemy.orm import Session
 
-from services.tf_model import predict_intensity
-from db.database import SessionLocal
-from models.workouts import Workout
+from backend.services.tf_model import predict_intensity
+from backend.db.database import SessionLocal
+from backend.models.workouts import Workout
 
 router = APIRouter(prefix="/tf", tags=["Pose Analysis"])
 
@@ -20,36 +19,51 @@ def get_db():
 @router.post("/analyze-image")
 async def analyze_image(
     file: UploadFile = File(...),
-    exercise: str = Query(...),   
-    db=Depends(get_db)
+    exercise: str = Query("squat"),
+    user_id: str = Query(...),
+    db: Session = Depends(get_db),
 ):
+    """
+    Analyze exercise image and auto-save workout
+    """
+
     try:
-        contents = await file.read()
-        np_arr = np.frombuffer(contents, np.uint8)
-        image = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+        
+        image_bytes = await file.read()
 
-        if image is None:
-            raise HTTPException(status_code=400, detail="Invalid image")
+        
+        result = predict_intensity(image_bytes, exercise)
 
-        result = predict_intensity(image, exercise)
+        score = int(result.get("score", 0))
+        reps = int(result.get("reps", 1))
+        feedback = result.get("feedback", "")
 
-       
         workout = Workout(
-            user_id="Varshith432",   
+            user_id=user_id,
             exercise=exercise,
-            reps=1,
+            reps=reps,
+            score=score,
+            feedback=feedback,
             duration=0,
-            score=result.get("score"),
-            feedback=result.get("feedback")
         )
 
         db.add(workout)
         db.commit()
+        db.refresh(workout)
 
         return {
             "success": True,
-            "filename": file.filename,
-            "result": result
+            "message": "Workout analyzed and saved",
+            "result": result,
+            "workout": {
+                "id": workout.id,
+                "user_id": user_id,
+                "exercise": exercise,
+                "score": score,
+                "reps": reps,
+                "feedback": feedback,
+                "created_at": workout.created_at,
+            },
         }
 
     except Exception as e:
