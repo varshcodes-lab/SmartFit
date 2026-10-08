@@ -1,0 +1,127 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.result {
+  margin-top: 20px;
+}
+
+.pose-image {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+/* SmartFit V2 live workout */
+.live-page {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+  text-align: left;
+}
+
+.live-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.live-header h1 { margin: 0 0 8px; font-size: clamp(2rem, 5vw, 3.4rem); }
+.live-header p { margin: 0; opacity: .72; }
+.eyebrow { font-size: .78rem; letter-spacing: .16em; font-weight: 800; margin-bottom: 8px !important; }
+.dashboard-link { color: inherit; text-decoration: none; font-weight: 700; }
+
+.live-controls { display: flex; align-items: end; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; }
+.live-controls label { display: flex; flex-direction: column; gap: 6px; font-weight: 700; }
+.live-controls select { min-width: 180px; padding: 11px 12px; border-radius: 10px; border: 1px solid #444; background: #1a1a1a; color: inherit; }
+.primary-button, .danger-button { border: 0; border-radius: 10px; padding: 12px 18px; font-weight: 800; }
+.primary-button { background: #22c55e; color: #07120b; }
+.danger-button { background: #ef4444; color: white; }
+
+.live-error { padding: 12px 14px; border-radius: 10px; margin-bottom: 16px; background: rgba(239,68,68,.15); color: #fecaca; }
+.live-grid { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(280px, .7fr); gap: 18px; }
+.camera-card, .metrics-card, .summary-card { border: 1px solid rgba(127,127,127,.25); border-radius: 18px; overflow: hidden; background: rgba(127,127,127,.06); }
+.camera-stage { position: relative; aspect-ratio: 16 / 9; background: #090909; overflow: hidden; }
+.camera-video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); display: block; }
+.pose-overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; transform: scaleX(-1); }
+.camera-placeholder { position: absolute; inset: 0; display: grid; place-content: center; gap: 12px; text-align: center; font-size: 3rem; background: #090909; }
+.camera-placeholder span { display: block; font-size: 1rem; opacity: .65; }
+.live-badge { position: absolute; top: 14px; left: 14px; background: #ef4444; color: white; border-radius: 999px; padding: 7px 11px; font-weight: 900; font-size: .75rem; }
+.hidden-canvas { display: none; }
+.metrics-card { padding: 22px; }
+.metric-main { text-align: center; padding: 10px 0 24px; border-bottom: 1px solid rgba(127,127,127,.2); }
+.metric-main span, .metric-row span, .feedback-box span, .summary-grid span { display: block; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; opacity: .6; }
+.metric-main strong { display: block; font-size: 5rem; line-height: 1; margin-top: 8px; }
+.metric-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 18px 0; }
+.metric-row div { padding: 12px; border-radius: 12px; background: rgba(127,127,127,.08); }
+.metric-row strong { display: block; font-size: 1.5rem; margin-top: 5px; }
+.feedback-box { padding: 16px; border-radius: 14px; background: rgba(34,197,94,.12); margin-bottom: 14px; }
+.feedback-box p { margin: 7px 0 0; font-weight: 700; line-height: 1.45; }
+.angle-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(127,127,127,.15); text-transform: capitalize; }
+.state-pill { margin-top: 16px; display: inline-block; padding: 7px 10px; border-radius: 999px; background: rgba(127,127,127,.12); text-transform: capitalize; font-size: .85rem; }
+.summary-card { margin-top: 18px; padding: 24px; }
+.summary-card h2 { margin-top: 0; }
+.summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.summary-grid > div { padding: 14px; border-radius: 12px; background: rgba(127,127,127,.08); }
+.summary-grid strong { display: block; margin-top: 5px; font-size: 1.2rem; }
+.summary-card p { opacity: .75; }
+
+@media (max-width: 850px) {
+  .live-grid { grid-template-columns: 1fr; }
+  .summary-grid { grid-template-columns: 1fr 1fr; }
+  .live-header { align-items: flex-start; flex-direction: column; }
+}
