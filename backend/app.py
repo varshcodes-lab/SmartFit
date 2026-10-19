@@ -16,6 +16,7 @@ from db.init_db import init_db
 from api.analytics import router as analytics_router
 from api.coach import router as coach_router
 from api.live_workout import router as live_workout_router
+from api.leaderboard import router as leaderboard_router
 
 app = FastAPI(title="SmartFit API")
 
@@ -34,6 +35,7 @@ app.include_router(video_router)
 app.include_router(workout_router)
 app.include_router(analytics_router)
 app.include_router(live_workout_router)
+app.include_router(leaderboard_router)
 
 
 @app.get("/")
