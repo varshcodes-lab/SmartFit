@@ -8,7 +8,12 @@ from services.live_workout import LiveWorkoutAnalyzer
 
 router = APIRouter(prefix="/live", tags=["Live Workout"])
 
-SUPPORTED_EXERCISES = {"squat", "pushup", "pullup"}
+SUPPORTED_EXERCISES = {"squat",
+    "pushup",
+    "pullup",
+    "lunge",
+    "jumpingjack",
+    "plank",}
 
 
 @router.websocket("/workout")

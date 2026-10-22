@@ -1,6 +1,6 @@
+import { API_BASE_URL } from "./config";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const BASE_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 const USER_ID = "demo_user";
 
 const POSE_CONNECTIONS = [
@@ -16,6 +16,9 @@ function LiveWorkout() {
   const streamRef = useRef(null);
   const socketRef = useRef(null);
   const frameTimerRef = useRef(null);
+  const workoutStartedAtRef = useRef(null);
+  const durationSecondsRef = useRef(0);
+  const stopRequestedRef = useRef(false);
 
   const [exercise, setExercise] = useState("squat");
   const [running, setRunning] = useState(false);
@@ -31,7 +34,7 @@ function LiveWorkout() {
   });
   const [summary, setSummary] = useState(null);
 
-  const wsUrl = `${BASE_URL.replace(/^http/, "ws")}/live/workout`;
+  const wsUrl = `${API_BASE_URL.replace(/^http/, "ws")}/live/workout`;
 
   const drawPose = useCallback((landmarks) => {
     const canvas = canvasRef.current;
@@ -83,11 +86,25 @@ function LiveWorkout() {
   }, []);
 
   const stopWorkout = useCallback(() => {
-    if (socketRef.current?.readyState === WebSocket.OPEN) {
-      socketRef.current.send(JSON.stringify({ type: "stop" }));
+    stopRequestedRef.current = true;
+
+    const socket = socketRef.current;
+
+    if (workoutStartedAtRef.current !== null) {
+      durationSecondsRef.current = Math.max(
+        0,
+        Math.round((Date.now() - workoutStartedAtRef.current) / 1000)
+      );
+      workoutStartedAtRef.current = null;
     }
-    if (frameTimerRef.current) clearInterval(frameTimerRef.current);
-    frameTimerRef.current = null;
+
+    if (socket?.readyState === WebSocket.OPEN) {
+      socket.send(JSON.stringify({ type: "stop" }));
+    } else if (socket?.readyState === WebSocket.CONNECTING) {
+      socket.close();
+      socketRef.current = null;
+    }
+
     stopCamera();
     setRunning(false);
     setConnecting(false);
@@ -115,6 +132,9 @@ function LiveWorkout() {
     setSummary(null);
     setAnalysis({ reps: 0, score: 0, average_score: 0, feedback: "Starting camera...", state: "up", angles: {} });
     setConnecting(true);
+    stopRequestedRef.current = false;
+    workoutStartedAtRef.current = null;
+    durationSecondsRef.current = 0;
 
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -130,31 +150,98 @@ function LiveWorkout() {
 
       socket.onopen = () => {
         socket.send(JSON.stringify({ type: "start", exercise, user_id: USER_ID }));
-        setConnecting(false);
-        setRunning(true);
-        frameTimerRef.current = setInterval(sendFrame, 200);
       };
 
       socket.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        if (data.type === "analysis") {
+        let data;
+
+        try {
+          data = JSON.parse(event.data);
+        } catch (err) {
+          console.error("Invalid live-workout server message:", err);
+          setError("Received an invalid response from the live-analysis server.");
+          return;
+        }
+
+        if (data.type === "ready") {
+          if (stopRequestedRef.current) return;
+
+          setConnecting(false);
+          setRunning(true);
+          setError("");
+          workoutStartedAtRef.current = Date.now();
+
+          if (frameTimerRef.current) {
+            clearInterval(frameTimerRef.current);
+          }
+
+          frameTimerRef.current = setInterval(sendFrame, 200);
+        } else if (data.type === "analysis") {
           setAnalysis(data);
           drawPose(data.landmarks);
         } else if (data.type === "summary") {
+          if (workoutStartedAtRef.current !== null) {
+            durationSecondsRef.current = Math.max(
+              0,
+              Math.round((Date.now() - workoutStartedAtRef.current) / 1000)
+            );
+            workoutStartedAtRef.current = null;
+          }
+
+          stopRequestedRef.current = true;
           setSummary(data.summary);
-          if (socketRef.current) {
-            socketRef.current.close();
+          setRunning(false);
+          setConnecting(false);
+          stopCamera();
+
+          if (socketRef.current === socket) {
             socketRef.current = null;
+          }
+
+          if (socket.readyState === WebSocket.OPEN) {
+            socket.close();
           }
         } else if (data.type === "error") {
           setError(data.message || "Live analysis error");
+          setConnecting(false);
+          setRunning(false);
+          stopCamera();
         }
       };
 
-      socket.onerror = () => setError("Could not connect to the SmartFit live-analysis server.");
+      socket.onerror = () => {
+        setError("Could not connect to the SmartFit live-analysis server.");
+        setConnecting(false);
+        setRunning(false);
+        stopCamera();
+      };
+
       socket.onclose = () => {
-        if (frameTimerRef.current) clearInterval(frameTimerRef.current);
+        if (frameTimerRef.current) {
+          clearInterval(frameTimerRef.current);
+        }
+
         frameTimerRef.current = null;
+        stopCamera();
+
+        if (socketRef.current === socket) {
+          socketRef.current = null;
+        }
+
+        if (workoutStartedAtRef.current !== null) {
+          durationSecondsRef.current = Math.max(
+            0,
+            Math.round((Date.now() - workoutStartedAtRef.current) / 1000)
+          );
+          workoutStartedAtRef.current = null;
+        }
+
+        setRunning(false);
+        setConnecting(false);
+
+        if (!stopRequestedRef.current) {
+          setError("The live-analysis connection closed unexpectedly. Please start again.");
+        }
       };
     } catch (err) {
       console.error(err);
@@ -169,7 +256,7 @@ function LiveWorkout() {
   const saveSummary = async () => {
     if (!summary) return;
     try {
-      const response = await fetch(`${BASE_URL}/workout/save`, {
+      const response = await fetch(`${API_BASE_URL}/workout/save`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -178,7 +265,7 @@ function LiveWorkout() {
           score: summary.average_score ?? summary.score ?? 0,
           reps: summary.reps ?? 0,
           feedback: summary.feedback || "Live workout completed",
-          duration: 0,
+          duration: durationSecondsRef.current,
         }),
       });
       if (!response.ok) throw new Error("Could not save workout");
@@ -196,7 +283,7 @@ function LiveWorkout() {
           <h1>Live Workout Coach</h1>
           <p>Real-time pose analysis, rep counting and form feedback.</p>
         </div>
-        <a className="dashboard-link" href="/dashboard">Dashboard →</a>
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}><a className="dashboard-link" href="/dashboard">Dashboard</a><a className="dashboard-link" href="/recommendations">AI Recommendations</a><a className="dashboard-link" href="/leaderboard">Leaderboard</a></div>
       </div>
 
       <div className="live-controls">
@@ -204,6 +291,10 @@ function LiveWorkout() {
           Exercise
           <select value={exercise} onChange={(e) => setExercise(e.target.value)} disabled={running || connecting}>
             <option value="squat">Squat</option>
+
+            <option value="lunge">Lunge</option>
+            <option value="jumpingjack">Jumping Jack</option>
+            <option value="plank">Plank</option>
             <option value="pushup">Push-up</option>
             <option value="pullup">Pull-up</option>
           </select>
@@ -217,15 +308,15 @@ function LiveWorkout() {
         )}
       </div>
 
-      {error && <div className="live-error">⚠ {error}</div>}
+      {error && <div className="live-error">{"\u26A0"} {error}</div>}
 
       <div className="live-grid">
         <section className="camera-card">
           <div className="camera-stage">
             <video ref={videoRef} muted playsInline className="camera-video" />
             <canvas ref={canvasRef} className="pose-overlay" />
-            {!running && <div className="camera-placeholder">📷<span>Start the workout to activate your camera</span></div>}
-            {running && <div className="live-badge">● LIVE</div>}
+            {!running && <div className="camera-placeholder"><span>Start the workout to activate your camera</span></div>}
+            {running && <div className="live-badge">LIVE</div>}
           </div>
           <canvas ref={captureRef} className="hidden-canvas" />
         </section>
@@ -245,7 +336,7 @@ function LiveWorkout() {
           </div>
           {Object.entries(analysis.angles || {}).map(([key, value]) => (
             <div className="angle-row" key={key}>
-              <span>{key.replaceAll("_", " ")}</span><strong>{value}°</strong>
+              <span>{key.replaceAll("_", " ")}</span><strong>{value}{"\u00B0"}</strong>
             </div>
           ))}
           <div className="state-pill">Position: {analysis.state}</div>
@@ -254,7 +345,7 @@ function LiveWorkout() {
 
       {summary && (
         <section className="summary-card">
-          <h2>Workout Complete 🎉</h2>
+          <h2>Workout Complete!</h2>
           <div className="summary-grid">
             <div><span>Exercise</span><strong>{summary.exercise}</strong></div>
             <div><span>Reps</span><strong>{summary.reps}</strong></div>

@@ -1,0 +1,261 @@
+[
+  {
+    "id": "exercise_selection_001",
+    "title": "Choosing exercises",
+    "content": "Choose exercises based on the user's fitness goal, experience, available equipment, preferences, and ability to perform movements safely. A balanced routine can include lower-body, upper-body pushing, upper-body pulling, and core exercises.",
+    "source": "SmartFit starter fitness guidance",
+    "url": "",
+    "tags": [
+      "exercise selection",
+      "goals",
+      "equipment",
+      "balance"
+    ],
+    "source_type": "internal_guidance",
+    "publisher": "SmartFit starter fitness guidance",
+    "evidence_claims": [],
+    "evidence_scope": "Internal project guidance; not independently verified external evidence."
+  },
+  {
+    "id": "progression_001",
+    "title": "Progressive overload",
+    "content": "Strength training can progress gradually as exercise technique and tolerance improve. Increase repetitions, resistance, or difficulty in manageable steps. Maintain controlled movement and appropriate rest.",
+    "source": "SmartFit starter fitness guidance",
+    "url": "",
+    "tags": [
+      "progression",
+      "strength",
+      "repetitions",
+      "resistance"
+    ],
+    "source_type": "internal_guidance",
+    "publisher": "SmartFit starter fitness guidance",
+    "evidence_claims": [],
+    "evidence_scope": "Internal project guidance; not independently verified external evidence."
+  },
+  {
+    "id": "recovery_001",
+    "title": "Recovery and consistency",
+    "content": "Allow adequate recovery between demanding sessions, get sufficient sleep, and follow a sustainable routine. Adjust training volume when fatigue interferes with technique or recovery.",
+    "source": "SmartFit starter fitness guidance",
+    "url": "",
+    "tags": [
+      "recovery",
+      "sleep",
+      "consistency",
+      "fatigue"
+    ],
+    "source_type": "internal_guidance",
+    "publisher": "SmartFit starter fitness guidance",
+    "evidence_claims": [],
+    "evidence_scope": "Internal project guidance; not independently verified external evidence."
+  },
+  {
+    "id": "safety_001",
+    "title": "Exercise safety",
+    "content": "Use controlled technique and an appropriate level of difficulty. Stop exercising if you experience pain, dizziness, chest pain, or unusual shortness of breath. Seek appropriate medical advice for concerning symptoms.",
+    "source": "SmartFit starter fitness guidance",
+    "url": "",
+    "tags": [
+      "safety",
+      "technique",
+      "pain",
+      "beginner"
+    ],
+    "source_type": "internal_guidance",
+    "publisher": "SmartFit starter fitness guidance",
+    "evidence_claims": [],
+    "evidence_scope": "Internal project guidance; not independently verified external evidence."
+  },
+  {
+    "id": "equipment_matching_001",
+    "title": "Matching exercises to available equipment",
+    "content": "Select exercises that can be performed with the equipment available to the user. Bodyweight exercises generally require no external equipment. Dumbbells can support exercises such as dumbbell floor presses, rows, goblet squats, and shoulder presses. Resistance bands can support band rows and other band-based movements. Do not recommend an exercise requiring equipment the user does not have. Consider exercise technique and individual ability as well as equipment availability.",
+    "source": "SmartFit curated general fitness guidance",
+    "url": "",
+    "tags": [
+      "equipment",
+      "dumbbells",
+      "resistance bands",
+      "bodyweight",
+      "exercise selection",
+      "availability"
+    ],
+    "source_type": "internal_guidance",
+    "publisher": "SmartFit curated general fitness guidance",
+    "evidence_claims": [],
+    "evidence_scope": "Internal project guidance; not independently verified external evidence."
+  },
+  {
+    "id": "chest_training_001",
+    "title": "Chest exercises and pushing movements",
+    "content": "Chest training can include pushing movements such as push-ups and dumbbell floor presses. Push-ups use bodyweight, while dumbbell floor presses require dumbbells and floor space. These exercises also involve the triceps and shoulders. Choose a variation that allows controlled technique and an appropriate level of difficulty. A chest-focused recommendation should prioritize exercises that actually involve the chest rather than relying only on a broad upper-body preference.",
+    "source": "SmartFit curated general fitness guidance",
+    "url": "",
+    "tags": [
+      "chest",
+      "push-up",
+      "push ups",
+      "dumbbell floor press",
+      "triceps",
+      "shoulders",
+      "muscle gain",
+      "upper body"
+    ],
+    "source_type": "internal_guidance",
+    "publisher": "SmartFit curated general fitness guidance",
+    "evidence_claims": [],
+    "evidence_scope": "Internal project guidance; not independently verified external evidence."
+  },
+  {
+    "id": "back_training_001",
+    "title": "Back exercises and pulling movements",
+    "content": "Rows are pulling movements that train back muscles and may also involve the biceps. Dumbbell rows require dumbbells, while resistance band rows require a resistance band. Choose the variation according to available equipment and ability. A back-focused recommendation should prioritize exercises that target the back. Maintain controlled movement and avoid using momentum to compensate for excessive resistance.",
+    "source": "SmartFit curated general fitness guidance",
+    "url": "",
+    "tags": [
+      "back",
+      "rows",
+      "dumbbell row",
+      "resistance band row",
+      "pulling",
+      "biceps",
+      "strength",
+      "equipment"
+    ],
+    "source_type": "internal_guidance",
+    "publisher": "SmartFit curated general fitness guidance",
+    "evidence_claims": [],
+    "evidence_scope": "Internal project guidance; not independently verified external evidence."
+  },
+  {
+    "id": "lower_body_training_001",
+    "title": "Lower-body exercises",
+    "content": "Lower-body exercises can include squats, lunges, and glute bridges. Bodyweight squats and bodyweight lunges do not require external equipment. Goblet squats require a dumbbell. These movements can involve the quadriceps, glutes, and hamstrings to different degrees. Choose exercises according to the user's target muscles, experience, equipment, and ability.",
+    "source": "SmartFit curated general fitness guidance",
+    "url": "",
+    "tags": [
+      "lower body",
+      "quadriceps",
+      "glutes",
+      "hamstrings",
+      "squat",
+      "lunge",
+      "glute bridge",
+      "goblet squat",
+      "legs"
+    ],
+    "source_type": "internal_guidance",
+    "publisher": "SmartFit curated general fitness guidance",
+    "evidence_claims": [],
+    "evidence_scope": "Internal project guidance; not independently verified external evidence."
+  },
+  {
+    "id": "difficulty_selection_001",
+    "title": "Matching exercise difficulty to experience",
+    "content": "Exercise selection should consider the user's experience and ability to perform a movement with controlled technique. Beginners can start with manageable variations and progress gradually as technique and tolerance improve. Intermediate and advanced labels are approximate catalog classifications, not guarantees that an exercise is suitable for every person. A recommendation score is a heuristic ranking value, not a probability of safety or success.",
+    "source": "SmartFit curated general fitness guidance",
+    "url": "",
+    "tags": [
+      "beginner",
+      "intermediate",
+      "advanced",
+      "difficulty",
+      "exercise progression",
+      "technique",
+      "experience"
+    ],
+    "source_type": "internal_guidance",
+    "publisher": "SmartFit curated general fitness guidance",
+    "evidence_claims": [],
+    "evidence_scope": "Internal project guidance; not independently verified external evidence."
+  },
+  {
+    "id": "targeted_recommendations_001",
+    "title": "Using goals and target muscles in recommendations",
+    "content": "Exercise recommendations should consider the user's main fitness goal, explicit target muscles, available equipment, experience, preferences, and recent exercise history. An explicit muscle target should influence ranking separately from a broad preference such as upper body or lower body. Variety can help diversify a list, but should not override important equipment constraints or the user's main target. Explain recommendations using the actual exercise attributes and ranking reasons.",
+    "source": "SmartFit recommendation design guidance",
+    "url": "",
+    "tags": [
+      "personalization",
+      "target muscles",
+      "preferences",
+      "exercise history",
+      "ranking",
+      "recommendations",
+      "upper body",
+      "lower body",
+      "goal"
+    ],
+    "source_type": "internal_guidance",
+    "publisher": "SmartFit recommendation design guidance",
+    "evidence_claims": [],
+    "evidence_scope": "Internal project guidance; not independently verified external evidence."
+  },
+  {
+    "id": "who_physical_activity_adults_2020",
+    "title": "WHO Guidelines on Physical Activity and Sedentary Behaviour",
+    "source": "World Health Organization",
+    "publisher": "World Health Organization",
+    "url": "https://www.who.int/publications-detail-redirect/9789240015128",
+    "source_type": "external_reference",
+    "topic": "physical_activity",
+    "tags": [
+      "physical activity",
+      "adults",
+      "strengthening",
+      "general fitness"
+    ],
+    "content": "WHO's physical-activity guidelines provide population-level recommendations for adults. They include aerobic activity and muscle-strengthening activities involving major muscle groups on at least two days per week. This is general public-health guidance, not an individualized exercise prescription and not proof that a particular exercise is best for an individual.",
+    "evidence_claims": [
+      "WHO provides population-level physical-activity guidance for adults.",
+      "The guidance includes muscle-strengthening activity involving major muscle groups on at least two days per week."
+    ],
+    "evidence_scope": "General public-health guidance; not individualized medical advice or exercise-ranking validation."
+  },
+  {
+    "id": "cdc_adult_activity_guidance",
+    "title": "Adding Physical Activity as an Adult",
+    "source": "Centers for Disease Control and Prevention",
+    "publisher": "Centers for Disease Control and Prevention",
+    "url": "https://www.cdc.gov/physical-activity-basics/adding-adults/index.html",
+    "source_type": "external_reference",
+    "topic": "physical_activity_and_safety",
+    "tags": [
+      "physical activity",
+      "adults",
+      "strengthening",
+      "health conditions",
+      "safety"
+    ],
+    "content": "The CDC's adult activity guidance recommends 150 minutes of moderate-intensity aerobic activity each week and muscle-strengthening activity on two days. People with chronic health conditions or other relevant concerns may need professional advice about appropriate activity. This general guidance does not provide individualized medical clearance.",
+    "evidence_claims": [
+      "CDC recommends 150 minutes of moderate-intensity aerobic activity each week for adults.",
+      "CDC recommends muscle-strengthening activity on two days per week for adults.",
+      "Some people may need professional advice about suitable activity."
+    ],
+    "evidence_scope": "General adult activity and safety guidance; not individualized medical advice."
+  },
+  {
+    "id": "acsm_resistance_training_position_stand",
+    "title": "ACSM Resistance Training Position Stand",
+    "source": "American College of Sports Medicine",
+    "publisher": "American College of Sports Medicine",
+    "url": "https://acsm.org/science-spotlight-acsm-releases-new-position-stand-on-resistance-training/",
+    "source_type": "external_reference",
+    "topic": "resistance_training",
+    "tags": [
+      "resistance training",
+      "strength",
+      "hypertrophy",
+      "training goals"
+    ],
+    "content": "The American College of Sports Medicine has published a position stand on resistance-training prescriptions for muscle function, hypertrophy, and physical performance in healthy adults. Its public summary discusses resistance training and training goals. This general guidance does not establish that SmartFit's individual exercise rankings are clinically validated.",
+    "evidence_claims": [
+      "ACSM has published a position stand on resistance training for healthy adults.",
+      "Resistance-training prescriptions can be considered in relation to training goals.",
+      "This source does not validate SmartFit's individual exercise rankings."
+    ],
+    "evidence_scope": "General resistance-training guidance; not individualized medical advice or ranking validation."
+  }
+]

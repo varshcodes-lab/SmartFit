@@ -1,3 +1,4 @@
+from api.diet import diet_router
 from dotenv import load_dotenv
 import os
 
@@ -5,7 +6,7 @@ load_dotenv()
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+from api.recommendations import router as recommendations_routers
 from api.tf import router as tf_router
 from api.health import router as health_router
 from api.performance import router as performance_router
@@ -19,6 +20,7 @@ from api.live_workout import router as live_workout_router
 from api.leaderboard import router as leaderboard_router
 
 app = FastAPI(title="SmartFit API")
+app.include_router(diet_router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -36,6 +38,7 @@ app.include_router(workout_router)
 app.include_router(analytics_router)
 app.include_router(live_workout_router)
 app.include_router(leaderboard_router)
+app.include_router(recommendations_routers)
 
 
 @app.get("/")

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../config";
 import { useEffect, useState } from "react";
 import {
   LineChart,
@@ -15,7 +16,6 @@ import {
 } from "recharts";
 
 
-const BASE_URL = "https://smartfit-70dv.onrender.com";
 const USER_ID = "demo_user"; 
 
 
@@ -34,7 +34,7 @@ function WorkoutDashboard() {
     async function loadWorkouts() {
       try {
         const res = await fetch(
-          `${BASE_URL}/workout/history/${USER_ID}`
+          `${API_BASE_URL}/workout/history/${USER_ID}`
         );
 
         if (!res.ok) {
@@ -63,7 +63,7 @@ function WorkoutDashboard() {
     setCoachReply("");
 
     try {
-      const res = await fetch(`${BASE_URL}/coach/chat`, {
+      const res = await fetch(`${API_BASE_URL}/coach/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
